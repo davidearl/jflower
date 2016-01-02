@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>example letters</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
+<script src='jflow.js'></script>
+<style>
+@page { /* define the printed page size */
+	margin: 0;
+	size: A4 portrait;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Open Sans", sans-serif;
+    font-size: 14pt; /* fairly large here just to consume space 
+                        in the example fairly quickly */
+}
+.box {
+	position: absolute;
+	background-color: #ffffe8; /* so we can see them on the screen */
+    overflow: hidden; /* critical: this is what decides where content
+                         should be moved to the next box */
+}
+.box *:first-child {
+	margin-top: 0; /* this avoids blank margins at the top of boxes, 
+                      because absolute elements don't collapse their vertical margins */
+}
+.page {
+	position: relative; /* so boxes and background are relative to page */
+	width: 210mm; /* our page size in absolute units */
+	height: 297mm;
+	overflow: hidden; /* just precautionary */
+	outline: 1px solid black; /* so we can see the page edges on screen */
+}
+.background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;	
+}
+@media print {
+    /* Don't actually print the guides we had on screen */
+	.page {
+		outline: none;
+	}
+	.box {
+		background-color: white;
+	}			
+}
+</style>
+
+<script>
+  /* run jflow when the document has loaded */
+  $(function(){
+      $(".page").flow(".content");
+  });  
+</script>
+
+</head>
+<body>
+
+<!-- our page definitions -->
+<div class='p1 page'>
+  <img src='example-background.png' class='background'>
+  <div class='box' style='left: 25mm; top: 35mm; width: 80mm; height: 35mm;'></div>
+  <div class='box' style='left: 18mm; top: 105mm; width: 120mm; height: 100mm;'></div>
+</div>
+<div class='p2 page'>
+  <div class='box' style='left: 18mm; top: 25mm; width: 178mm; height: 240mm;'></div>
+  <div class='page-number' style='position: absolute; left: 18mm; top: 280mm; width: 10mm; height: 10mm;'>99</div>
+</div>
+
+
+<!-- some sample content: 1 -->
+<div class='content'>
+<div class='address'>
+Jane Doe<br>
+123 Somewhere Road<br>
+Back of Beyond<br>
+BB1 1BB
+</div>
+<!-- start in next box... -->
+<h2 class='advance-before'>Dear Jane,</h2>
+<p class='keep-together'>Enim fermentum <em>lobortis</em> placerat rutrum dolor vulputate ultricies suspendisse mus orci penatibus etiam dui vivamus aenean curae; ac accumsan donec. Ut torquent vel massa tincidunt hendrerit <strong>urna</strong> in. Pede. Penatibus. Orci. Phasellus ornare scelerisque nulla mollis mus. Aliquam. Tincidunt massa <strong>natoque</strong> placerat fusce, vehicula inceptos rutrum odio <strong>varius</strong> diam quisque condimentum. Ornare mus per lacus sollicitudin nonummy sollicitudin nibh habitant ante non est nam placerat justo cubilia. Egestas tellus odio tortor sem.</p>
+
+<div class='keep-together'><!-- don't break across box ends... -->
+<h2>Conubia Hac Proin Fermentum Dictum</h2>
+
+<p>Pede sed. Pellentesque. Mus cras vehicula vel nulla <em>fringilla</em> cum accumsan mus hendrerit. Ultrices facilisis maecenas natoque. Amet sem est curae; egestas rhoncus habitant <strong>sagittis</strong> blandit quam nam ridiculus. <strong>Nonummy</strong> a, lectus fames odio arcu dis potenti magnis bibendum ornare lorem habitasse cum fusce volutpat, mus class quam. <em>Aptent</em> lacus nostra sem dignissim nunc.</p>
+</div>
+
+<p>Dictumst viverra senectus felis imperdiet, diam <em>nullam</em> suspendisse turpis. Maecenas tempus. Luctus. Vulputate. In purus sociis ac hymenaeos <strong>cum</strong> leo semper montes felis nonummy montes suscipit lectus habitasse semper, nunc euismod <strong>leo</strong> curabitur fusce.</p>
+
+<h2>Et Curae; Lectus Fringilla Ullamcorper</h2>
+<p>Ante condimentum sit tortor ultrices purus eu semper ullamcorper nibh id dignissim, a sodales mus tortor neque netus mauris eros cubilia dolor euismod nam lorem <em>natoque</em> vitae sociis suspendisse. Morbi. Purus arcu mauris, dictumst <strong>lacinia</strong> a risus nostra posuere. Lorem orci suspendisse sagittis. <strong>Risus</strong> <strong>sollicitudin</strong> egestas interdum mattis rutrum cursus.</p>
+
+<p>Montes ut morbi consectetuer nibh nostra. Elementum lacus <em>augue</em> pulvinar nunc aenean. Sociosqu eget class tristique nam dis malesuada hac tortor nibh ad Nam <em>suscipit</em> consequat eu quisque lacus tempus parturient ipsum tortor bibendum quis adipiscing nam lorem ipsum ornare cursus ultricies, pellentesque in bibendum mauris auctor eros tempus cubilia torquent non nibh ultricies dictum quam sociis, egestas sit at. Lacus bibendum conubia lacinia suspendisse leo per.</p>
+
+<h2>Facilisi Volutpat Habitasse Purus</h2>
+<p>Amet magna, egestas ad ac arcu velit torquent feugiat mauris adipiscing torquent mi est amet at vivamus parturient aliquet velit Per. Bibendum, duis tellus. Ligula nisl <em>cras</em> consectetuer egestas fames facilisis <strong>sagittis</strong> fringilla <strong>ultrices</strong> rhoncus lacus.</p>
+
+<p>Malesuada nisl. Natoque bibendum commodo class bibendum Non euismod lorem Fermentum justo et nunc euismod class mollis nulla habitasse augue <strong>orci</strong> potenti platea hac ad blandit ipsum aliquet fames gravida feugiat curabitur. Platea vivamus erat rhoncus congue eget sociosqu. Amet suscipit nibh posuere.</p>
+
+<p>Sodales mi nec lectus felis aliquet commodo viverra auctor congue orci augue nibh turpis nibh purus mus dolor. <strong>Quisque</strong> augue eros. Mi lacinia eros augue elit elementum aptent convallis sit gravida lacus. Vehicula pharetra dapibus nostra urna consectetuer metus sit eros augue vulputate. Lectus platea praesent. A venenatis montes tempus consectetuer platea. Nostra metus est primis malesuada pellentesque senectus curae; pellentesque hymenaeos nec tempus vestibulum, per leo ultricies. Ornare consequat at.</p>
+
+<p>Ligula eleifend sapien varius class cras gravida semper. Sociosqu commodo platea felis class, eleifend montes aenean blandit habitasse mauris. Natoque pede sodales, maecenas vestibulum maecenas quam tempus nibh lorem. Aliquet laoreet inceptos Fringilla elementum Lacinia ridiculus et eleifend.</p>
+
+<h2>Velit</h2>
+<p>Amet praesent quam imperdiet penatibus hac sodales litora risus leo lorem. Justo potenti. Velit gravida libero vitae amet dignissim. Sagittis commodo suspendisse. Metus tempor eu iaculis proin nisi in pretium magnis tristique cras enim, porta.</p>
+</div>
+
+<!-- some sample content: 2 -->
+<div class='content'>
+<div class='address'>
+John Bull<br>
+56 High Street<br>
+Letterville<br>
+LL1 1XX
+</div>
+<h2 class='advance-before'>Dear John,</h2>
+<p>
+	Lorem&nbsp;ipsum dolor sit amet, consectetur adipiscing elit. Proin nisi.
+</p>
+<p>
+Arcu, facilisis vitae ultrices non, congue et nunc. Nulla
+facilisi. <span style='color: tomato;'> Nunc pulvinar lacus</span> ac efficitur iaculis. Nunc nec orci ut
+dolor laoreet dictum. Fusce ultrices vestibulum dignissim. Praesent id
+volutpat orci. Nam aliquam ipsum ac enim venenatis pharetra. Phasellus
+bibendum nisl nec semper laoreet.
+</p>
+
+<p>
+In vel mauris a elit viverra aliquam vel vulputate ipsum. Sed aliquet
+tempor nisl cursus ultrices. Nam congue libero in rutrum
+fringilla. Vivamus vel ullamcorper sem, at gravida odio. Vivamus non
+enim et elit sagittis eleifend in <em>eu tortor</em>. Curabitur scelerisque,
+dolor vitae mattis commodo, arcu odio consequat lacus, sed eleifend
+nisi urna ac felis. Donec in volutpat leo. Donec risus turpis,
+consequat a pellentesque in, feugiat sit amet purus. Integer velit
+dolor, porta ac elit venenatis, porttitor mattis neque. Maecenas
+ultrices tellus diam, vitae fringilla nibh iaculis sed.
+</p>
+
+<p>
+	<span> Vestibulum</span> nec metus<span> rhoncus </span> placerat, felis at, fringilla mauris. Ut
+in nisi ut magna euismod dignissim. Class aptent taciti sociosqu ad
+litora torquent per conubia nostra, per inceptos himenaeos. In in
+scelerisque massa. Nulla hendrerit lectus at orci scelerisque
+sagittis. Class aptent taciti sociosqu ad litora torquent per conubia
+nostra, per inceptos himenaeos. Morbi ut blandit ipsum, eu
+sollicitudin libero. Sed porttitor, mauris ut ultrices dictum, justo
+odio feugiat odio, ac posuere nulla enim sed tellus. Ut at lorem
+consequat, euismod odio sit amet, fermentum metus. Donec eleifend sed
+sapien a pellentesque. Pellentesque placerat turpis vitae elit
+fermentum finibus. Curabitur vulputate ipsum sit amet odio blandit, eu
+semper dolor gravida.
+</p>
+
+<p>
+Vivamus at tempus purus, in congue ex. Duis scelerisque nisi vitae
+luctus rutrum. Etiam nec diam a nisl luctus varius non consequat
+nisi. Quisque bibendum est neque. Nam eget dictum justo, nec malesuada
+urna. Sed condimentum erat sit amet augue tincidunt, finibus posuere
+elit congue. Duis mattis dolor eu sapien ultricies, in tristique nunc
+efficitur. Nullam dui eros, posuere vel ex sit amet, ullamcorper
+vulputate massa. Morbi blandit metus vitae arcu gravida, eu accumsan
+neque porta. Mauris tristique ut arcu eget maximus.
+</p>
+
+</p>Nam accumsan vitae odio nec convallis. Nulla efficitur sem at
+lectus sodales, sit amet dictum augue tincidunt. Cras bibendum vel leo
+in porttitor. Donec in dui venenatis, porttitor mauris vel, accumsan
+velit. Nam euismod ornare accumsan. Etiam condimentum, ligula quis
+rutrum pulvinar, arcu augue suscipit nisl, eu faucibus nisi eros sed
+dui. Integer eget fringilla eros, at tristique ligula. Curabitur
+accumsan vitae odio a finibus. Mauris eu arcu ut ante rhoncus
+aliquam. Suspendisse bibendum sagittis nibh, eu feugiat neque. Fusce
+non arcu diam.
+</p>
+	</div>
+
+
+</body>
+</html>

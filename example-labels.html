@@ -1,0 +1,581 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>example labels</title>
+<script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
+<script src='jflow.js'></script>
+<style>
+@page { /* define the printed page size */
+	margin: 0;
+	size: A4 portrait;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+.box {
+	position: absolute;
+	background-color: #ffffe8; /* so we can see them on the screen */
+    overflow: hidden; /* critical: this is what decides where content
+                         should be moved to the next box */
+}
+.box *:first-child {
+	margin-top: 0; /* this avoids blank margins at the top of boxes, 
+                      because absolute elements don't collapse their vertical margins */
+}
+.page {
+	position: relative; /* so boxes and background are relative to page */
+	width: 210mm; /* our page size in absolute units */
+	height: 297mm;
+	overflow: hidden; /* just precautionary */
+	outline: 1px solid black; /* so we can see the page edges on screen */
+}
+.background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;	
+}
+@media print {
+    /* Don't actually print the guides we had on screen */
+	.page {
+		outline: none;
+	}
+	.box {
+		background-color: white;
+	}			
+}
+
+/* some styling for the label content: */
+.label {
+    font-size: 10pt;
+}
+.labelinfo {
+    font-weight: bold;
+    text-align: right;
+}
+</style>
+
+<script>
+  /* run jflow when the document has loaded */
+  $(function(){
+      $(".page").flow(".content", {pagination: "repeat"});
+  });  
+</script>
+
+</head>
+<body>
+
+<!-- our page definition: just one, repeated indefinitely, containing 16 boxes sized 
+     and positioned for the label blanks on which we would print. 
+     You might want to leave some margins either by making the boxes smaller than the
+     labels or by assigning some margins in CSS to the boxes themseleves
+-->
+<div class="page">
+  <div class="box" style="left: 15mm; top: 15.9mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 15.9mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 15mm; top: 49.8mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 49.8mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 15mm; top: 83.7mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 83.7mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 15mm; top: 117.6mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 117.6mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 15mm; top: 151.5mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 151.5mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 15mm; top: 185.4mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 185.4mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 15mm; top: 219.3mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 219.3mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 15mm; top: 253.2mm; width: 90mm; height: 28mm"></div>
+  <div class="box" style="left: 116mm; top: 253.2mm; width: 90mm; height: 28mm"></div>
+</div>
+
+<!-- some sample content: 40 mailing labels. 
+     Imagine these being generated from a database perhaps - though just generating the HTML directly 
+     in that case might be just as easy.
+     Thanks http://www.randomthing.me/ ! 
+-->
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 432372</div>
+	<div class='addressee'>Joseph Anderson</div>  
+	<div class='address'>
+	  1095 Jackson Way<br>
+	  Albuquerque<br>
+	  CT 12345
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 864712</div>
+	<div class='addressee'>Margaret Adams</div>  
+	<div class='address'>
+	  636 Main Way<br>
+	  Raleigh<br>
+	  WV 23456
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 343003</div>
+	<div class='addressee'>Gary Daniels</div>  
+	<div class='address'>
+	  166 9th St<br>
+	  Pembroke Pines<br>
+	  SC 34567
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 859402</div>
+	<div class='addressee'>Carl L. Sanders</div>  
+	<div class='address'>
+	  1233 Jackson Ave<br>
+	  Cedar Rapids<br>
+	  CO 45678
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 369323</div>
+	<div class='addressee'>Charles Robinson</div>  
+	<div class='address'>
+	  151 Willow Way<br>
+	  Broken Arrow<br>
+	  IL 56789
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 369021</div>
+	<div class='addressee'>Marie Sanchez</div>  
+	<div class='address'>
+	  787 South Way<br>
+	  Moreno Valley<br>
+	  AZ 67890
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 519319</div>
+	<div class='addressee'>Johnny Webb</div>  
+	<div class='address'>
+	  1315 4th Lane<br>
+	  Toledo<br>
+	  GA 78901
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 654739</div>
+	<div class='addressee'>Howard Harrison</div>  
+	<div class='address'>
+	  521 Chestnut Lane<br>
+	  Glendale<br>
+	  NH 89012
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 991672</div>
+	<div class='addressee'>Fran&#231;ois Tucker</div>  
+	<div class='address'>
+	  460 Elm Way<br>
+	  Rochester<br>
+	  WV 90123
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 776795</div>
+	<div class='addressee'>Lois Perez</div>  
+	<div class='address'>
+	  887 Highland Dr<br>
+	  Escondido<br>
+	  SD 54321
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 435153</div>
+	<div class='addressee'>Evelyn Miller</div>  
+	<div class='address'>
+	  963 2nd Ave<br>
+	  Beaumont<br>
+	  AK 65432
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref1 820693</div>
+	<div class='addressee'>Robin Richardson</div>  
+	<div class='address'>
+	  886 Meadow Way<br>
+	  Lubbock<br>
+	  FL 76543
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 533355</div>
+	<div class='addressee'>Craig Moore</div>  
+	<div class='address'>
+	  569 5th Way<br>
+	  Manchester<br>
+	  MS 87654
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 865858</div>
+	<div class='addressee'>Anthony Long</div>  
+	<div class='address'>
+	  106 South St<br>
+	  Orlando<br>
+	  MN 98765
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 805226</div>
+	<div class='addressee'>Marie Wood</div>  
+	<div class='address'>
+	  555 View Ct<br>
+	  Stockton<br>
+	  NC 19876
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 13868</div>
+	<div class='addressee'>Russell F. Wells</div>  
+	<div class='address'>
+	  980 9th St<br>
+	  North Las Vegas<br>
+	  NJ 21098
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 13868</div>
+	<div class='addressee'>William F. Collins</div>  
+	<div class='address'>
+	  293 Cedar Ct<br>
+	  San Antonio<br>
+	  NE 32109
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 629089</div>
+	<div class='addressee'>Wayne Taylor</div>  
+	<div class='address'>
+	  1027 Lake Ct<br>
+	  El Monte<br>
+	  IA 43210
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 483279</div>
+	<div class='addressee'>Victor Sanders</div>  
+	<div class='address'>
+	  846 Pine Blvd<br>
+	  Killeen<br>
+	  TN 67584
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 559468</div>
+	<div class='addressee'>Ernest Ross</div>  
+	<div class='address'>
+	  58 11th Dr<br>
+	  Aurora<br>
+	  WI 76859
+	</div>
+  </div>
+</div>
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 527065</div>
+	<div class='addressee'>Juan Peterson</div>  
+	<div class='address'>
+	  962 5th Lane<br>
+	  Oakland<br>
+	  ID 87960
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 900081</div>
+	<div class='addressee'>Justin Baker</div>  
+	<div class='address'>
+	  296 Wilson Dr<br>
+	  Flint<br>
+	  CO 98071
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 871138</div>
+	<div class='addressee'>Keith Morris</div>  
+	<div class='address'>
+	  1128 West St<br>
+	  Lowell<br>
+	  VA 19283
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 561456</div>
+	<div class='addressee'>Sara Black</div>  
+	<div class='address'>
+	  522 1st Lane<br>
+	  South Bend<br>
+	  MD 21394
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 506728</div>
+	<div class='addressee'>Jesse Ford</div>  
+	<div class='address'>
+	  58 6th Ct<br>
+	  Lincoln<br>
+	  DE 32419
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 661434</div>
+	<div class='addressee'>Peter Fisher</div>  
+	<div class='address'>
+	  1131 Hill Blvd<br>
+	  Madison<br>
+	  KS 43520
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 529331</div>
+	<div class='addressee'>Ralph Henry</div>  
+	<div class='address'>
+	  1241 Center Ct<br>
+	  Chandler<br>
+	  ME 54630
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 791057</div>
+	<div class='addressee'>Lori Rivera</div>  
+	<div class='address'>
+	  1201 Meadow Ave<br>
+	  Fargo<br>
+	  GA 87098
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 538897</div>
+	<div class='addressee'>Jennifer U. Morales</div>  
+	<div class='address'>
+	  1238 Waze St<br>
+	  Aurora<br>
+	  NH 78698
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 401747</div>
+	<div class='addressee'>Lois Butler</div>  
+	<div class='address'>
+	  1059 Elm Blvd<br>
+	  Gresham<br>
+	  MS 76598
+	</div>
+  </div>
+</div>
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 13868</div>
+	<div class='addressee'>Eric Cooper</div>  
+	<div class='address'>
+	  758 10th Blvd<br>
+	  Sacramento<br>
+	  MN 65987
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 273853</div>
+	<div class='addressee'>Shirley Rivera</div>  
+	<div class='address'>
+	  1148 View Way<br>
+	  West Jordan<br>
+	  PA 54980
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 593003</div>
+	<div class='addressee'>Janet Garcia</div>  
+	<div class='address'>
+	  9 Walnut Lane<br>
+	  St. Louis<br>
+	  VA 54097
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 895534</div>
+	<div class='addressee'>Joseph Owens</div>  
+	<div class='address'>
+	  795 Jackson Lane<br>
+	  Springfield<br>
+	  IL 87453
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 210732</div>
+	<div class='addressee'>Bonnie Mason</div>  
+	<div class='address'>
+	  985 Spring Ave<br>
+	  Lansing<br>
+	  TX 65487
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 259300</div>
+	<div class='addressee'>Carlos Perez</div>  
+	<div class='address'>
+	  1072 Forest Ct<br>
+	  Palm Bay<br>
+	  AR 65421
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 926064</div>
+	<div class='addressee'>Richard Barnes</div>  
+	<div class='address'>
+	  674 Main St<br>
+	  Fairfield<br>
+	  NV 54989
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 293938</div>
+	<div class='addressee'>Michelle Morris</div>  
+	<div class='address'>
+	  1190 3rd Dr<br>
+	  Charlotte<br>
+	  IN 65982
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 466061</div>
+	<div class='addressee'>Cheryl Allen</div>  
+	<div class='address'>
+	  809 4th Lane<br>
+	  Thousand Oaks<br>
+	  OH 45222
+	</div>
+  </div>
+</div>
+
+<div class='content'>
+  <div class='label'>
+	<div class='labelinfo'>ref 631163</div>
+	<div class='addressee'>Roy Ortiz</div>  
+	<div class='address'>
+	  485 West Ct<br>
+	  Spokane<br>
+	  ME 65877
+	</div>
+  </div>
+</div>
+
+</body>
+</html>

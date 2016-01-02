@@ -28,6 +28,21 @@
 									  including placeholder content. There is no reflow if it
 									  gets bigger. */
 
+			repeatfrom: "repeat-from",
+			                       /* when this class is applied to one of the page elements, on
+									  running out pf pages in which to put content, we'll start
+									  again at this one (the first, if more than one). When no
+									  such page exists, we just repeat the last page. This can
+									  be used to repeat even-odd page sequences, for example. */
+
+			fillerpage: "filler-page",
+			                       /* Use the page labelled with this class name as the filler
+									  for duplex (so you can have background graphics on those
+									  as well if you want, or "this page intentionally left
+									  blank"). The filler page must be among the original pages
+									  but is not treated as one of the repeating pages
+									  (typically you'll put it at the end). */
+
 			classprefix: "jf_"     /* various class names are added to elements; they all start with
 									  this prefix. You only need to change this if there is a clash
 									  with your own class names */
@@ -43,10 +58,16 @@
 		var jip = $("<div>").addClass(c_insertionpoint);
 		jthis.first().before(jip); // to act as an insertion point
 		var jpages = jthis.detach(); // because we're going to add back multiple copies as we go
+		var jfiller = jthis.filter("."+settings.fillerpage);
+		if (jfiller.length > 0) { jpages = jpages.not("."+settings.fillerpage); }
 		var jallpages = $([]);
 		var jboxes = $([]); // these are the boxes within those inserted copies
 		var ibox = 0; var ipage = 0; var ipagenumber = 0;
 
+		var irepeatfrom = jpages.length-1;
+		var jrepeatfrom = jpages.filter("."+settings.repeatfrom);
+		if (jrepeatfrom.length > 0) { irepeatfrom = jpages.index(jrepeatfrom); }
+		
 		var fits = function(el, boxbottom) {
 			/* Checks DOM element el to see if it fits in container jbox (true) or not (false). The
 			   first leaf element which overflows is marked with the class c_splithere and each
@@ -158,7 +179,7 @@
 				   page templates doesn't add a box, this will loop forever; but having a loop
 				   allows you to insert blank pages. */
 				if (! first) {
-					if (++ipage == jpages.length) { ipage--; }
+					if (++ipage == jpages.length) { ipage = irepeatfrom; }
 				}
 				var jpage = jpages.eq(ipage).clone();
 				jboxes = jboxes.add(jpage.insertBefore(jip).find(settings.box));
@@ -168,8 +189,8 @@
 			}
 		}
 
-		var nextpage = function() {
-			var jpage = jpages.first().clone();
+		var nextpage = function(jfillerpage) {
+			var jpage = jfillerpage ? jfillerpage : jpages.first().clone();
 			jboxes = jpage.insertBefore(jip).find(settings.box);
 			jallpages = jallpages.add(jpage);
 			ipage = ibox = 0;
@@ -197,9 +218,14 @@
 				divide(div, jboxes.eq(ibox));
 			}
 			if (settings.pagination == "duplex" && (ipagenumber % 2) != 0) {
-				/* duplex requires adding an empty page if we have an odd number so far */
-				nextpage();
-				jboxes.first().parent().empty();
+				/* duplex requires adding an empty page (or the page defined by .filler-page) 
+				   if we have an odd number so far */
+				if (jfiller.length == 0) {
+					nextpage();
+					jboxes.first().parent().empty();
+				} else {
+					nextpage(jfiller);
+				}
 			}
 		});
 

@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<title>test</title>
+<meta charset='utf-8'>
+<title>example duplex with filler page and repeatfrom</title>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
 <script src='jflow.js'></script>
@@ -54,7 +55,7 @@ body {
 <script>
   /* run jflow when the document has loaded */
   $(function(){
-      $(".page").flow(".content", {pagination: "duplex"});
+      $(".page").flow(".content", {pagination: "duplex", repeatfrom: "leftpage", fillerpage: "my-filler"});
   });  
 </script>
 
@@ -67,9 +68,16 @@ body {
   <div class='box' style='left: 25mm; top: 35mm; width: 80mm; height: 35mm;'></div>
   <div class='box' style='left: 18mm; top: 105mm; width: 120mm; height: 100mm;'></div>
 </div>
-<div class='p2 page'>
-  <div class='box' style='left: 18mm; top: 25mm; width: 178mm; height: 240mm;'></div>
+<div class='p2 page leftpage'><!-- repeat pages from here -->
+  <div class='box' style='left: 18mm; top: 25mm; width: 130mm; height: 120mm;'></div>
   <div class='page-number' style='position: absolute; left: 18mm; top: 280mm; width: 10mm; height: 10mm;'>99</div>
+</div>
+<div class='p3 page rightpage'>
+  <div class='box' style='left: 65mm; top: 25mm; width: 130mm; height: 120mm;'></div>
+  <div class='page-number' style='position: absolute; right: 18mm; top: 280mm; width: 10mm; height: 10mm; text-align: right;'>99</div>
+</div>
+<div class='page my-filler'>
+  <p style='position: absolute; top: 100mm; left: 50mm; width: 110mm; font-size: 30pt;'>This filler page is intentionally left blank</p>
 </div>
 
 
