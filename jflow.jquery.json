@@ -1,5 +1,6 @@
 {
 	"name": "jflow",
+	"title": "jflow",
 	"version": "0.2.0",
 	"description": "A jQuery plugin which flows continuous html into a sequence of fixed size boxes within pages",
 	"main": "jflow.js",
