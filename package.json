@@ -1,0 +1,34 @@
+{
+	"name": "jflow",
+	"version": "0.2.0",
+	"description": "A jQuery plugin which flows continuous html into a sequence of fixed size boxes within pages",
+	"main": "jflow.js",
+	"keywords": [
+		"jquery-plugins",
+		"jflow",
+		"pagination"
+	],
+	"author": {
+		"name": "David Earl",
+		"url": "https://github.com/davidearl"
+	},
+	"maintainers": [
+		{
+			"name": "David Earl",
+			"url": "https://github.com/davidearl"
+		}
+	],
+	"licenses": [
+		{
+			"type": "GPL2",
+			"url": "http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
+		}
+	],
+	"bugs": "https://github.com/davidearl/jflow/issues",
+	"homepage": "https://github.com/davidearl/jflow",
+	"docs": "https://github.com/davidearl/jflow/blob/master/README.md",
+	"download": "https://github.com/davidearl/jflow/archive/master.zip",
+	"dependencies": {
+		"jquery": ">=1.10"
+	}
+}
