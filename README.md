@@ -17,7 +17,7 @@ There are some **examples** in the jflower directory. You can just open these ex
 Include jquery, and jflower.js from the jflower directory, for example:
 
     <script src='/jquery-2.1.4.min.js'></script>
-    <script src='/jflower-0.1.1/jflower.js'></script>
+    <script src='/jflower-0.2.3/jflower.js'></script>
 
 The plugin is invoked like this
 
