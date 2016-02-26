@@ -5,7 +5,7 @@
 <title>example duplex with filler page and repeatfrom</title>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
-<script src='jflow.js'></script>
+<script src='jflower.js'></script>
 <style>
 @page { /* define the printed page size */
 	margin: 0;
@@ -53,7 +53,7 @@ body {
 </style>
 
 <script>
-  /* run jflow when the document has loaded */
+  /* run jflower when the document has loaded */
   $(function(){
       $(".page").flow(".content", {pagination: "duplex", repeatfrom: "leftpage", fillerpage: "my-filler"});
   });  

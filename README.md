@@ -1,6 +1,6 @@
-# jflow jQuery plugin
+# jflower jQuery plugin
 
-jflow is a jQuery plugin which flows continuous html into a sequence of fixed size boxes within pages.
+jflower is a jQuery plugin which flows continuous html into a sequence of fixed size boxes within pages.
 
 ## why?
 
@@ -12,12 +12,12 @@ Of course, if you don't start with html, you could make a PDF (with TCDPF for ex
 
 ## how?
 
-There are some **examples** in the jflow directory. You can just open these examples in your browser: no need to have them on a web server.
+There are some **examples** in the jflower directory. You can just open these examples in your browser: no need to have them on a web server.
 
-Include jquery, and jflow.js from the jflow directory, for example:
+Include jquery, and jflower.js from the jflower directory, for example:
 
     <script src='/jquery-2.1.4.min.js'></script>
-    <script src='/jflow-0.1.1/jflow.js'></script>
+    <script src='/jflower-0.1.1/jflower.js'></script>
 
 The plugin is invoked like this
 
@@ -96,10 +96,26 @@ Typically:
             });
         </script>
 
-* Because jflow depends on measuring heights of things to see if they will fit in boxes, if you don't have images with pre-determined heights in the img tags, you'll need to wait for them to load before flowing:
+* Because jflower depends on measuring heights of things to see if they will fit in boxes, if you don't have images with pre-determined heights in the img tags, you'll need to wait for them to load before flowing:
 
         <script>
             $(window).on("load", function(){
                 $(".page").flow(".content");
             });
+        </script>
+
+* Likewise, if you use remotely loaded fonts (like Google or TypeKit), the measurements for fit won't work if the font hasn't loaded by the time jflower is started. So rather than using e.g. the Google stylesheet link element, use their [font loader](https://github.com/typekit/webfontloader), thus:
+
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+        <script>
+          WebFont.load({
+            google: {
+              families: ['Open Sans']
+            },
+            active: function(){
+                $(window).on("load", function(){
+                    $(".page").flow(".content");
+                });
+            }
+          });
         </script>

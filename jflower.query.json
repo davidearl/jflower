@@ -1,13 +1,15 @@
 {
-	"name": "jflow",
-	"title": "jflow",
-	"version": "0.2.1",
+	"name": "jflower",
+	"title": "jflower",
+	"version": "0.2.2",
 	"description": "A jQuery plugin which flows continuous html into a sequence of fixed size boxes within pages",
-	"main": "jflow.js",
+	"main": "jflower.js",
 	"keywords": [
 		"jquery-plugins",
-		"jflow",
-		"pagination"
+		"jflower",
+		"flow",
+		"pagination",
+		"paginate"
 	],
 	"author": {
 		"name": "David Earl",
@@ -25,10 +27,10 @@
 			"url": "http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
 		}
 	],
-	"bugs": "https://github.com/davidearl/jflow/issues",
-	"homepage": "https://github.com/davidearl/jflow",
-	"docs": "https://github.com/davidearl/jflow/blob/master/README.md",
-	"download": "https://github.com/davidearl/jflow/archive/master.zip",
+	"bugs": "https://github.com/davidearl/jflower/issues",
+	"homepage": "https://github.com/davidearl/jflower",
+	"docs": "https://github.com/davidearl/jflower/blob/master/README.md",
+	"download": "https://github.com/davidearl/jflower/archive/master.zip",
 	"dependencies": {
 		"jquery": ">=1.10"
 	}
