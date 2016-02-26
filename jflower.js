@@ -99,7 +99,9 @@
 				/* it's not atthe top of a box, but we're being asked to make it so */
 				jel.addClass(c_splithere).addClass(c_leaf).removeClass(settings.advancebefore);
 				return false;
-			} else if (jel.offset().top + jel.height() < boxbottom) {
+			} else if (jel.offset().top + jel.height() < boxbottom &&
+					   jel.find("."+settings.advancebefore).length == 0 /* such elements require division */)
+			{
 				/* if the element is all visible, move on to the next one */
 				return true;
 			} else if (jel.hasClass(settings.keeptogether)) {
