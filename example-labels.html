@@ -28,8 +28,8 @@ body {
 }
 .page {
 	position: relative; /* so boxes and background are relative to page */
-	width: 210mm; /* our page size in absolute units */
-	height: 297mm;
+	width: 209mm; /* our page size in absolute units */
+	height: 295mm; /* less than A4 because Chrome overflow physical page if exactly the same as @page */
 	overflow: hidden; /* just precautionary */
 	outline: 1px solid black; /* so we can see the page edges on screen */
 }
@@ -43,6 +43,17 @@ body {
     /* Don't actually print the guides we had on screen */
 	.page {
 		outline: none;
+        page-break-before: always;
+    }
+    .page:first-child {
+        page-break-before: avoid;
+
+    }
+	@-moz-document url-prefix() { /* Firefox only printing bug workround */
+		.page {
+			margin-top: 1px;
+			top: -1px;
+		}
 	}
 	.box {
 		background-color: white;

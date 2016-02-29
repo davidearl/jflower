@@ -50,20 +50,39 @@ See the example for more information.
 
 Typically:
 
-* your page elements will be divs defined with a physical size in css, e.g.
+* you'll want a CSS rule to define printed page physical size, like this:
 
-        width: 210mm;
-        height: 297mm;
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+* your page elements will be divs defined with a physical size in css. However, there is what appears to be a bug in Chrome whereby if the page elements are the same size as the physical page (in @page) they actually overflow. I found I had to lose 2mm from the bottom for it to work reliably when printed. Also page elements need a relative position so their absolute subordinates are relative to the page elements. Hence:
+
+        .page {
+            width: 209mm;
+            height: 295mm;
+            position: relative;
+        }
 
 * your boxes within those pages will be div with class "box", position: absolute and overflow: hidden, with top, left, width and height positioning them within the page. Because absolutely positioned boxes don't collapse their vertically adjacent margins, you'll probably also need a css rule to avoid a space at the top of boxes:
 
         .box *:first-child { margin-top: 0; }
 
-    you'll want a CSS rule to define printed pages, like this:
-
-        @page {margin: 0; size: A4 portrait; }
-
     Don't use id's on your pages or descendants or contents or descendants, as they need to be duplicated.
+    
+* As you'll likely be printing the result, you'll want to make sure page elements start at the right place on the physical page with print media CSS. As well as page-break-before, there seems to be a bug in Firefox whereby absolutely positioned elements don't render properly on the second and subsequent sheets when printed. It appears to be sufficient to set a top margin of 1px or more to work round this, and we can then position it back up 1 pixel to compensate. Hence:
+
+        @media print {
+	        .page {	page-break-before: always; }
+	        .page:first-child {	page-break-before: avoid; }
+	        @-moz-document url-prefix() { /* Firefox only */
+		        .page {
+			        margin-top: 1px;
+			        top: -1px; /* it's already relative */
+		        }
+	        }
+	    }
 
 * and then your html will be structured:
 
