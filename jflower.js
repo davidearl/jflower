@@ -117,7 +117,7 @@
 				var split = s.split(/\s+/);
 				$.each(split, function(i,v) {
 					if (v == "") { return true; }
-					jspan.append($("<span>").addClass(c_leaf).text(v));
+					jspan.append($("<span>").addClass(c_leaf).html(v));
 					if (i < split.length-1 || s.match(/\s+$/)) { jspan.append(" "); }
 				});
 				jel.replaceWith(jspan);
