@@ -43,9 +43,14 @@
 									  but is not treated as one of the repeating pages
 									  (typically you'll put it at the end). */
 
-			classprefix: "jf_"     /* various class names are added to elements; they all start with
+			classprefix: "jf_",    /* various class names are added to elements; they all start with
 									  this prefix. You only need to change this if there is a clash
 									  with your own class names */
+
+			pagelimit: 20          /* any one piece of content (chunk of text to flow into boxes)
+									  cannot generate more than this number of pages (this usually indicates
+									  failure to fit any box and would make an infinite loop otherwise) */
+			
 		}, options);
 
 		var c_splithere = settings.classprefix+"sh";
@@ -67,6 +72,8 @@
 		var irepeatfrom = jpages.length-1;
 		var jrepeatfrom = jpages.filter("."+settings.repeatfrom);
 		if (jrepeatfrom.length > 0) { irepeatfrom = jpages.index(jrepeatfrom); }
+
+		var wontfit = false;
 		
 		var fits = function(el, boxbottom) {
 			/* Checks DOM element el to see if it fits in container jbox (true) or not (false). The
@@ -174,6 +181,7 @@
 		}
 
 		var nextbox = function(first){
+			var addedpage = false;
 			if (! first) { ibox++; }
 			while (ibox >= jboxes.length) {
 				/* we've run out of boxes on this page, add another page (the same as the final one
@@ -188,7 +196,9 @@
 				jallpages = jallpages.add(jpage);
 				ipagenumber++;
 				jpage.attr(settings.pagenumber, ipagenumber);
+				addedpage = true;
 			}
+			return addedpage;
 		}
 
 		var nextpage = function(jfillerpage) {
@@ -199,6 +209,25 @@
 			ipagenumber++;
 			jpage.attr(settings.pagenumber, ipagenumber);
 		}
+
+		if (settings.pagination == 'table') {
+			/* adjust content so it all becomes one table */
+			var jtbody = $(contents).first().find('table').first();
+			if (jtbody.children('tbody').length > 0) { jtbody = jtbody.children('tbody'); }
+			$(contents).each(function(i, content){
+				$(content).contents().each(function(ii, child){
+					var jc = $(child);
+					if (child.nodeType == 8) {
+						jc.appendTo(jtbody);
+					} else if (child.nodeType == 1 && $(child).is('table')) {
+						if (jc.children('tbody').length > 0) { jc = jc.children('tbody'); }
+						jc.find('tr').first().appendTo(jtbody);
+					}
+				});
+				if (i == 0) { return; }
+				$(content).remove();
+			});
+		}
 		
 		/* flow each content into its own sequence of pages... */
 		var first = true;
@@ -206,18 +235,27 @@
 			/* simplex and duplex start on the first page of the page templates, but 'repeat' 
 			   flows in to the next available box */
 			ipagenumber = 0;
-			settings.pagination == "repeat" ? nextbox(first) : nextpage();
+			switch(settings.pagination){
+			case "repeat": nextbox(first); break;
+			case "": break;
+			default: nextpage(); break;
+			}
 			first = false;
 			/* put the content in the box: usually it will overflow */
 			jboxes.eq(ibox).empty().append(content);
-			for(;;) {
+			var pagesadded = 0;
+			for(;pagesadded < settings.pagelimit;) {
 				var jbox = jboxes.eq(ibox);
 				var div = jbox.children().get(0); // there is only one - we just put it there
 				if (fits(div, jbox.offset().top+jbox.height())) { break; }
 				/* Any box to put the divided content into? If not create a new page from the last one */
-				nextbox();
+				if (nextbox()) { pagesadded++; }
 				/* move the overflowing content to the next box... */
 				divide(div, jboxes.eq(ibox));
+			}
+			if (pagesadded == settings.pagelimit) {
+				wontfit = true;
+				return false;
 			}
 			if (settings.pagination == "duplex" && (ipagenumber % 2) != 0) {
 				/* duplex requires adding an empty page (or the page defined by .filler-page) 
@@ -238,7 +276,12 @@
 			var jthis = $(this);
 			jthis.text(jthis.closest("["+settings.pagenumber+"]").attr(settings.pagenumber));
 		});
-		
+
+		if (wontfit) {
+			setTimeout(function(){
+				alert("It looks like some content won't fit in any box. You may need to reduce font size or make one or more boxes larger");
+			}, 100);
+		}
 		return jallpages;
 	}
 })(jQuery);
