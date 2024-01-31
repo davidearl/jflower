@@ -165,7 +165,7 @@
 				if (jparent2) { return jparent2.append(el); }
 			} else if (jel.hasClass(c_splithere)) { /* the point of the split */
 				jel.removeClass(c_splithere);
-				return $(jel.parent().get(0).cloneNode(false)).append(el);				
+				return $(jel.parent().get(0).cloneNode(false)).append(el);
 			} else if (jel.hasClass(c_dividethis)) { /* split between part1 and part2 */
 				var jpart2 = null;
 				jel.removeClass(c_dividethis).contents().each(function(){
@@ -173,7 +173,11 @@
 				});
 				if (! jpart2) { return null; }
 				if (jparent2) { return jparent2.append(jpart2); }
-				return $(jel.parent().get(0).cloneNode(false)).append(jpart2);				
+				var jnew = $(jel.parent().get(0).cloneNode(false)).append(jpart2);
+				if (jel.is('li')) {
+					(jel.text() == "" ? jel : jpart2).css({'list-style-type': 'none'});
+				}
+				return jnew;
 			} else if (jparent2) { /* move into part2 */
 				return jparent2.append(el);				
 			}
